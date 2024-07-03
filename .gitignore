@@ -1,5 +1,6 @@
 dwl
 *.o
+*.patch
 *-protocol.c
 *-protocol.h
 .ccls-cache
