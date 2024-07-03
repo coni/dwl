@@ -138,7 +138,7 @@ static const Key keys[] = {
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_q,          spawn,          {.v = termcmd} },
-	{ MODKEY,                    XKB_KEY_e,          spawn,          {.v = filemanager} },
+	// { MODKEY,                    XKB_KEY_e,          spawn,          {.v = filemanager} },
 	{ MODKEY,                    XKB_KEY_f,          spawn,          {.v = webbrowser} },
 	{ MODKEY,                    XKB_KEY_s,          spawn,          {.v = screenshot} },
 
@@ -175,6 +175,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY,                    XKB_KEY_t,      togglefloating, {0} },
 	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_E,      togglefakefullscreen, {0} },
 
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
