@@ -51,12 +51,17 @@ static const Layout layouts[] = {
 */
 /* NOTE: ALWAYS add a fallback rule, even if you are completely sure it won't be used */
 static const MonitorRule monrules[] = {
-	/* name       mfact  nmaster scale layout       rotate/reflect                x    y */
-	/* example of a HiDPI laptop monitor:
-	{ "eDP-1",    0.5f,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+	/* name       mfact nmaster scale layout       rotate/reflect              x  y  resx resy rate mode adaptive*/
+	/* example of a HiDPI laptop monitor at 120Hz:
+	{ "eDP-1",    0.5f,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 0, 0, 0, 0, 120.000f, 1, 1},
+	* mode let's the user decide on how dwl should implement the modes:
+	* -1 Sets a custom mode following the users choice
+	* All other number's set the mode at the index n, 0 is the standard mode; see wlr-randr
 	*/
 	/* defaults */
-	{ NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+	// { NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, -1, -1, 1920, 1080, 0.0f, 0 ,1},
+	{ "HDMI-A-1",    0.5f,  1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 0, 200, 0, 0, 60.000f, 1, 1},
+	{ "DP-1",        0.5f,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 1920, 0, 3840, 2160, 143.988f, 1, 0},
 };
 
 /* keyboard */
@@ -138,7 +143,7 @@ static const Key keys[] = {
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_q,          spawn,          {.v = termcmd} },
-	// { MODKEY,                    XKB_KEY_e,          spawn,          {.v = filemanager} },
+	{ MODKEY,                    XKB_KEY_e,          spawn,          {.v = filemanager} },
 	{ MODKEY,                    XKB_KEY_f,          spawn,          {.v = webbrowser} },
 	{ MODKEY,                    XKB_KEY_s,          spawn,          {.v = screenshot} },
 
@@ -174,8 +179,8 @@ static const Key keys[] = {
 
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY,                    XKB_KEY_t,      togglefloating, {0} },
-	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_E,      togglefakefullscreen, {0} },
+	{ MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_space,         togglefullscreen, {0} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefakefullscreen, {0} },
 
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
